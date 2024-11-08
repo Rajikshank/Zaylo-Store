@@ -1,12 +1,29 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { signIn } from "next-auth/react"
-import { redirect } from "next/dist/server/api-utils"
+import { Button } from "@/components/ui/button";
 
-export default function Socials(){
-    return (<div>
-        <Button onClick={()=>signIn("google" ,{redirect:false,callbackUrl:"/"})}>Sign in with Google</Button>
-        <Button onClick={()=>signIn("github",{redirect:false,callbackUrl:"/"})}>Sign in with Github</Button>
-    </div>)
+import { signIn } from "next-auth/react";
+
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
+
+export default function Socials() {
+  return (
+    <div className="flex flex-col items-center w-full gap-4 ">
+      <Button
+        variant={"outline"}
+        className="flex gap-4  w-full"
+        onClick={() => signIn("google", { redirect: false, callbackUrl: "/" })}
+      >
+        <FcGoogle className="w-5 h-5" /> <p>Sign in with Google</p>{" "}
+      </Button>
+      <Button
+        variant={"outline"}
+        className="flex gap-4 w-full"
+        onClick={() => signIn("github", { redirect: false, callbackUrl: "/" })}
+      >
+        <FaGithub className="w-5 h-5" /> <p>Sign in with Github</p>{" "}
+      </Button>
+    </div>
+  );
 }

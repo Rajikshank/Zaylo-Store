@@ -3,6 +3,7 @@ import UserButton from "./userButton";
 import Link from "next/link";
 import { LogIn } from "lucide-react";
 import { Button } from "../ui/button";
+import Logo from "@/components/navbar/logo";
 
 export default async function Navbar() {
   const session = await auth();
@@ -10,7 +11,7 @@ export default async function Navbar() {
   return (
     <header className="bg-emerald-200 ">
       <ul className="flex justify-between text-black">
-        <li>Logo</li>
+        <Link href={"/"}> <Logo/></Link>
 
         {!session ? (
           <li>

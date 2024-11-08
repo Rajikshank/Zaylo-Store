@@ -8,6 +8,41 @@
       "when": 1731069455584,
       "tag": "0000_sudden_nitro",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1731084991718,
+      "tag": "0001_illegal_catseye",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1731092704498,
+      "tag": "0002_perfect_barracuda",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1731092810307,
+      "tag": "0003_quick_blade",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1731094112879,
+      "tag": "0004_bent_zeigeist",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1731095585071,
+      "tag": "0005_marvelous_lenny_balinger",
+      "breakpoints": true
     }
   ]
 }
