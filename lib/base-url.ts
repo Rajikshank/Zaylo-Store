@@ -3,5 +3,5 @@ export default function getBaseUrl() {
 
   if (process.env.VERCEL_URL) return `https://${process.env.DOMAN_URL}`;
 
-  return "https://localhost:3000";
+  return "http://localhost:3000";
 }

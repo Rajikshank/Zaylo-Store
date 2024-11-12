@@ -10,14 +10,21 @@ export default async function Navbar() {
   console.log(session);
   return (
     <header className="bg-emerald-200 ">
-      <ul className="flex justify-between text-black">
-        <Link href={"/"}> <Logo/></Link>
+      <ul className="flex justify-between text-black py-2">
+        <li>
+          <Link href={"/"} aria-label="AgroStore Logo">
+            {" "}
+            <Logo />
+          </Link>
+        </li>
 
         {!session ? (
           <li>
             {" "}
-            <Button asChild >
-              <Link href="/auth/login" className="flex gap-2"><LogIn size={16}/> <span>Login</span> </Link>
+            <Button asChild>
+              <Link href="/auth/login" className="flex gap-2">
+                <LogIn size={16} /> <span>Login</span>{" "}
+              </Link>
             </Button>
           </li>
         ) : (
