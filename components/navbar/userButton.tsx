@@ -2,7 +2,7 @@
 
 import { Session } from "next-auth";
 import { signOut } from "next-auth/react";
-import React from "react";
+import React, { useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,13 +14,29 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Image from "next/image";
 import { LogOutIcon, Moon, SettingsIcon, Sun, TruckIcon } from "lucide-react";
+import { useTheme } from "next-themes";
+import { Switch } from "../ui/switch";
+import { useRouter } from "next/navigation";
 
 export default function UserButton({ user }: Session) {
+  const { setTheme, theme } = useTheme();
+  const [checked, setChecked] = useState(false);
+  const router = useRouter();
+  function setSwitchState() {
+    switch (theme) {
+      case "dark":
+        return setChecked(true);
+      case "light":
+        return setChecked(false);
+
+      case "system":
+        return setChecked(false);
+    }
+  }
   if (user) {
     return (
       <DropdownMenu modal={false}>
         <DropdownMenuTrigger>
-         
           <Avatar>
             {user.image && (
               <Image src={user.image} alt={user.name!} fill={true} />
@@ -51,14 +67,20 @@ export default function UserButton({ user }: Session) {
             </span>
           </div>
           <DropdownMenuSeparator />
-          <DropdownMenuItem className="py-4 group font-medium cursor-pointer transition-all duration-500">
+          <DropdownMenuItem
+            onClick={() => router.push("/dashboard/orders")}
+            className="py-4 group font-medium cursor-pointer "
+          >
             <TruckIcon
               size={14}
               className="mr-3 group-hover:translate-x-1 transition-all duration-300 ease-in-out "
             />{" "}
             My Orders
           </DropdownMenuItem>
-          <DropdownMenuItem className="group py-4 font-medium cursor-pointer transition-all duration-500">
+          <DropdownMenuItem
+            onClick={() => router.push("/dashboard/settings")}
+            className="group py-4 font-medium cursor-pointer "
+          >
             <SettingsIcon
               size={14}
               className="mr-3 group-hover:rotate-180 transition-all duration-300 ease-in-out "
@@ -66,12 +88,38 @@ export default function UserButton({ user }: Session) {
             Settings
           </DropdownMenuItem>
 
-          <DropdownMenuItem className="py-4 font-medium cursor-pointer transition-all duration-500">
-            <div className="flex items-center flex-row justify-center">
-              <Sun size={14} />
-              <Moon size={14} />
-            </div>
-          </DropdownMenuItem>
+          {theme && (
+            <DropdownMenuItem className="py-4 font-medium cursor-pointer  ">
+              <div
+                className="group flex items-center flex-row justify-center"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="relative flex  h-4 mr-6">
+                  <Sun
+                    size={14}
+                    className="group-hover:text-yellow-600 absolute dark:scale-0 dark:-rotate-90 group-hover:rotate-180 transition-all ease-in-out duration-500"
+                  />
+                  <Moon
+                    size={14}
+                    className="group-hover:text-blue-400  dark:scale-100 scale-0 dark:-rotate-90 "
+                  />
+                </div>
+                <p className="dark:text-blue-400 text-secondary-foreground/75 text-yellow-400  ">
+                  {theme[0].toUpperCase() + theme?.slice(1)}
+                </p>
+                <Switch
+                  className="scale-75 "
+                  checked={checked}
+                  onCheckedChange={(e) => {
+                    setChecked((prev) => !prev);
+                    console.log(e);
+                    if (e) setTheme("dark");
+                    if (!e) setTheme("light");
+                  }}
+                />
+              </div>
+            </DropdownMenuItem>
+          )}
           <DropdownMenuItem
             onClick={() => signOut()}
             className="group py-4 focus:bg-destructive/30 font-medium cursor-pointer transition-all duration-500"
