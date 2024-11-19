@@ -21,12 +21,15 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-switch": "^1.1.1",
     "@types/bcrypt": "^5.0.2",
+    "@uploadthing/react": "^7.1.1",
     "agrostore": "file:",
     "bcrypt": "^5.1.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.36.1",
+    "framer-motion": "^11.11.17",
+    "input-otp": "^1.4.1",
     "lucide-react": "^0.455.0",
     "next": "15.0.2",
     "next-auth": "^5.0.0-beta.25",
@@ -40,6 +43,7 @@
     "resend": "^4.0.1-alpha.0",
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7",
+    "uploadthing": "^7.3.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {

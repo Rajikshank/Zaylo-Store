@@ -2,8 +2,13 @@
 
 import { eq } from "drizzle-orm";
 import { db } from "..";
-import { emailtokens, PasswordResetTokens, users } from "../schema";
-
+import {
+  emailtokens,
+  PasswordResetTokens,
+  twoFactorTokens,
+  users,
+} from "../schema";
+import crypto from "crypto";
 export const getVerificationTokenByEmail = async (email: string) => {
   try {
     const verificationToken = await db.query.emailtokens.findFirst({
@@ -64,8 +69,6 @@ export const getPasswordResettokenByToken = async (token: string) => {
       where: eq(PasswordResetTokens.token, token),
     });
 
-
-   
     return passwordResetToken;
   } catch {
     return null;
@@ -107,6 +110,59 @@ export const generatePasswordResetToken = async (email: string) => {
       .returning();
 
     return passwordResetToken;
+  } catch {
+    return null;
+  }
+};
+
+export const getTwoFactorTokenByEmail = async (email: string) => {
+  try {
+    const twoFactorToken = await db.query.twoFactorTokens.findFirst({
+      where: eq(twoFactorTokens.email, email),
+    });
+
+    return twoFactorToken;
+  } catch {
+    return null;
+  }
+};
+
+export const getTwoFactortokenByToken = async (token: string) => {
+  try {
+    const twoFactorToken = await db.query.twoFactorTokens.findFirst({
+      where: eq(twoFactorTokens.token, token),
+    });
+
+    return twoFactorToken;
+  } catch {
+    return null;
+  }
+};
+
+export const generateTwoFactorToken = async (email: string) => {
+  try {
+    const token = crypto.randomInt(100_000, 1_000_000).toString();
+
+    const expires = new Date(new Date().getTime() + 3600 * 1000);
+
+    const existingToken = await getTwoFactorTokenByEmail(email);
+
+    if (existingToken) {
+      await db
+        .delete(twoFactorTokens)
+        .where(eq(twoFactorTokens.id, existingToken.id));
+    }
+
+    const twoFactorToken = await db
+      .insert(twoFactorTokens)
+      .values({
+        email: email,
+        token: token,
+        expires: expires,
+      })
+      .returning();
+
+    return twoFactorToken;
   } catch {
     return null;
   }

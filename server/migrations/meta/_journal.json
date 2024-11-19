@@ -57,6 +57,13 @@
       "when": 1731342679169,
       "tag": "0007_heavy_miss_america",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1731955452476,
+      "tag": "0008_lean_reaper",
+      "breakpoints": true
     }
   ]
 }
