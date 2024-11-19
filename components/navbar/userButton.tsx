@@ -2,16 +2,15 @@
 
 import { Session } from "next-auth";
 import { signOut } from "next-auth/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import Image from "next/image";
 import { LogOutIcon, Moon, SettingsIcon, Sun, TruckIcon } from "lucide-react";
 import { useTheme } from "next-themes";
@@ -33,6 +32,12 @@ export default function UserButton({ user }: Session) {
         return setChecked(false);
     }
   }
+
+  useEffect(() => {
+    setSwitchState();
+  }, []);
+
+  console.log("theme is  ", theme);
   if (user) {
     return (
       <DropdownMenu modal={false}>
