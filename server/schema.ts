@@ -138,7 +138,7 @@ export const variantImages = pgTable("variantImages", {
 export const variantTags = pgTable("variantTags", {
   id: serial("id").primaryKey(),
   tag: text("tag").notNull(),
-  name: text("name").notNull(),
+
   variantID: serial("variantID")
     .notNull()
     .references(() => productVariants.id, { onDelete: "cascade" }),

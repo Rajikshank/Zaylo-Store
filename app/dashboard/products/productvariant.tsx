@@ -26,6 +26,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { VariantSchema } from "@/types/variant-schema";
 import { InputTags } from "./input-tags";
 import VariantImages from "./variant-images";
+import { useAction } from "next-safe-action/hook";
+import { createVariant } from "@/server/actions/create-variant";
+import { toast } from "@/hooks/use-toast";
+import { useEffect, useState } from "react";
+import { deleteVariant } from "@/server/actions/delete-variants";
 
 export default function ProductVariant({
   editMode,
@@ -52,12 +57,90 @@ export default function ProductVariant({
     mode: "onChange",
   });
 
-  function onSubmit(values: z.infer<typeof VariantSchema>) {
-    console.log(values);
-  }
+  const setEdit = () => {
+    if (!editMode) {
+      form.reset();
+      return;
+    }
 
+    if (editMode && variant) {
+      form.setValue("editMode", true);
+      form.setValue("id", variant.id);
+      form.setValue("ProductID", variant.productID);
+      form.setValue("productType", variant.productType);
+      form.setValue("productType", variant.productType);
+      form.setValue("color", variant.color);
+      form.setValue(
+        "tags",
+        variant.variantTags.map((tag) => tag.tag)
+      );
+      form.setValue(
+        "variantImages",
+        variant.variantImages.map((img) => ({
+          name: img.name,
+          size: img.size,
+          url: img.url,
+        }))
+      );
+    }
+  };
+
+  useEffect(() => {
+    setEdit();
+  }, []);
+  const { execute, status } = useAction(createVariant, {
+    onExecute() {
+      toast({
+        variant: "default",
+        title: "Creating variant",
+      });
+
+      setOpen(false);
+    },
+    onSuccess: (data) => {
+      if (data?.success) {
+        toast({
+          variant: "success",
+          title: data.success,
+        });
+      }
+      if (data?.error) {
+        toast({
+          variant: "destructive",
+          title: data.error,
+        });
+      }
+    },
+  });
+
+  const variantAction = useAction(deleteVariant, {
+    onExecute() {
+      toast({
+        variant: "default",
+        title: "Deleting variant",
+      });
+    },
+    onSuccess(data) {
+      if (data.error) {
+        toast({
+          variant: "destructive",
+          title: data.error,
+        });
+      }
+      if (data.success) {
+        toast({
+          variant: "success",
+          title: data.success,
+        });
+      }
+    },
+  });
+  function onSubmit(values: z.infer<typeof VariantSchema>) {
+    execute(values);
+  }
+  const [open, setOpen] = useState(false);
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>{children}</DialogTrigger>
       <DialogContent className="lg:max-w-screen-lg overflow-y-scroll max-h-[860px] rounded-md">
         <DialogHeader>
@@ -121,15 +204,32 @@ export default function ProductVariant({
             />
 
             <VariantImages />
+            <div className="flex gap-4 items-center justify-center">
+              {editMode && variant && (
+                <Button
+                  variant={"destructive"}
+                  type="button"
+                  disabled={variantAction.status === "executing"}
+                  onClick={(e) => {
+                    e.preventDefault();
 
-            {editMode && variant && (
-              <Button type="button" onClick={(e) => e.preventDefault()}>
-                Delete Variant
+                    variantAction.execute({ id: variant.id });
+                  }}
+                >
+                  Delete Variant
+                </Button>
+              )}
+              <Button
+                disabled={
+                  status === "executing" ||
+                  !form.formState.isValid ||
+                  !form.formState.isDirty
+                }
+                type="submit"
+              >
+                {editMode ? "Update Variant" : "Create Variant"}
               </Button>
-            )}
-            <Button type="submit">
-              {editMode ? "Update Variant" : "Create Variant"}
-            </Button>
+            </div>
           </form>
         </Form>
       </DialogContent>

@@ -11,6 +11,7 @@
     "db:generate": "drizzle-kit generate"
   },
   "dependencies": {
+    "@algolia/autocomplete-js": "^1.17.7",
     "@auth/drizzle-adapter": "^1.7.3",
     "@hookform/resolvers": "^3.9.1",
     "@neondatabase/serverless": "^0.10.3",
@@ -32,6 +33,7 @@
     "@types/bcrypt": "^5.0.2",
     "@uploadthing/react": "^7.1.1",
     "agrostore": "file:",
+    "algoliasearch": "^5.15.0",
     "bcrypt": "^5.1.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
