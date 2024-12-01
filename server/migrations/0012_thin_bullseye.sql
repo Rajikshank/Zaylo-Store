@@ -1,0 +1,1 @@
+ALTER TABLE "variantTags" ADD COLUMN "name" text NOT NULL;

@@ -14,6 +14,9 @@ export const ourFileRouter = {
     .onUploadComplete(async ({ metadata, file }) => {
       // This code RUNS ON YOUR SERVER after upload
     }),
+    variantUploader:f({image:{maxFileSize:"4MB",maxFileCount:10}}).onUploadComplete(async({metadata,file})=>{
+console.log(file)
+    })
 } satisfies FileRouter;
 
 export type OurFileRouter = typeof ourFileRouter;

@@ -64,6 +64,34 @@
       "when": 1731955452476,
       "tag": "0008_lean_reaper",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1732186049770,
+      "tag": "0009_real_wolfpack",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1732728739612,
+      "tag": "0010_sparkling_cardiac",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1732879777525,
+      "tag": "0011_dark_masque",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1733062120348,
+      "tag": "0012_thin_bullseye",
+      "breakpoints": true
     }
   ]
 }
