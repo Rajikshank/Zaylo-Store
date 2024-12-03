@@ -6,6 +6,10 @@ import { Separator } from "@/components/ui/separator";
 import { formatPricetoLKR } from "@/lib/format-price";
 import ProductPick from "@/components/products/product-pick";
 import ProductShowcase from "@/components/products/product-showcase";
+import Reviews from "@/components/reviews/reviews";
+import { getReviewAverage } from "@/lib/review-average";
+import Stars from "@/components/reviews/stars";
+import AddCart from "@/components/cart/add-cart";
 
 export async function generateStaticParams() {
   const data = await db.query.productVariants.findMany({
@@ -29,6 +33,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
     with: {
       product: {
         with: {
+          reviews: true,
           productVariants: {
             with: {
               variantImages: true,
@@ -41,25 +46,36 @@ export default async function Page({ params }: { params: { slug: string } }) {
   });
 
   if (variant) {
+    const reviewAvg = getReviewAverage(
+      variant?.product.reviews.map((r) => r.rating)
+    );
+
     return (
       <div>
         <section className="flex flex-col lg:flex-row gap-4 lg:gap-12  ">
           <div className="flex-1">
-          <ProductShowcase variants={variant.product.productVariants}/>
+            <ProductShowcase variants={variant.product.productVariants} />
           </div>
           <div className="fex gap-2 flex-col flex-1">
             <h2 className="text-2xl font-bold"> {variant?.product.title}</h2>
             <div>
               <ProductType variants={variant.product.productVariants} />
+
+              <Stars
+                rating={reviewAvg}
+                totalReviews={variant.product.reviews.length}
+              />
             </div>
-            <Separator className="my-2"/>
+            <Separator className="my-2" />
             <p className="text-2xl font-medium py-2">
               {formatPricetoLKR(variant.product.price)}
             </p>
             <div
               dangerouslySetInnerHTML={{ __html: variant.product.description }}
             ></div>
-            <p className="text-secondary-foreground font-medium my-2 ">Available Colors</p>
+            <p className="text-secondary-foreground font-medium my-2 ">
+              Available Colors
+            </p>
             <div className="flex gap-4">
               {variant.product.productVariants.map((prodvariant) => (
                 <ProductPick
@@ -74,8 +90,10 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 />
               ))}
             </div>
+            <AddCart />
           </div>
         </section>
+        <Reviews productID={variant.productID} />
       </div>
     );
   }

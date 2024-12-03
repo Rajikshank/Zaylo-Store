@@ -133,6 +133,8 @@ export default function ProductVariant({
           title: data.success,
         });
       }
+
+      form.reset();
     },
   });
   function onSubmit(values: z.infer<typeof VariantSchema>) {

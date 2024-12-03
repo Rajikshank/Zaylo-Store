@@ -15,7 +15,7 @@ export default function Products({ variants }: ProductTyoes) {
       {variants.map((variant) => (
         <Link className="py-2"
           key={variant.id}
-          href={`/products/${variant.id}?id=${variant.id}&productID=${variant.productID}&price=${variant.product.price}&title=${variant.product.title}&type=${variant.productType}&image${variant.variantImages[0].url}`}
+          href={`/products/${variant.id}?id=${variant.id}&productID=${variant.productID}&price=${variant.product.price}&title=${variant.product.title}&type=${variant.productType}&image=${variant.variantImages[0].url}`}
         >
           <Image
             className="rounded-md pb-2 "

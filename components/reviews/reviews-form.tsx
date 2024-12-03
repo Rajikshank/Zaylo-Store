@@ -25,6 +25,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useAction } from "next-safe-action/hook";
+import { addReview } from "@/server/actions/add-reviews";
+import { toast } from "@/hooks/use-toast";
 
 export default function ReviewsForm() {
   const params = useSearchParams();
@@ -35,16 +38,39 @@ export default function ReviewsForm() {
     defaultValues: {
       rating: 0,
       comment: "",
+      productID,
     },
   });
 
+  const { execute, status } = useAction(addReview, {
+    onSuccess({ error, success }) {
+      if (error) {
+        toast({
+          variant: "destructive",
+          title: error,
+        });
+      }
+
+      if (success) {
+        toast({
+          variant: "success",
+          title: "Review Added",
+        });
+        form.reset();
+      }
+    },
+  });
   function onSubmit(values: z.infer<typeof reviewSchema>) {
-    console.log("adding review");
+    execute({
+      comment: values.comment,
+      rating: values.rating,
+      productID,
+    });
   }
 
   return (
     <Popover>
-      <PopoverTrigger>
+      <PopoverTrigger asChild>
         <div className="w-full">
           <Button className="font-medium w-full">Leave a review</Button>
         </div>
@@ -58,19 +84,19 @@ export default function ReviewsForm() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Leave your review</FormLabel>
-                  <FormControl></FormControl>
+                  <FormControl>
                   <Textarea
                     {...field}
                     placeholder="How would you describe this product?"
                   />
-
+</FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
             <FormField
               control={form.control}
-              name="comment"
+              name="rating"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Leave your Rating</FormLabel>
@@ -89,13 +115,15 @@ export default function ReviewsForm() {
                           <Star
                             key={value}
                             onClick={() => {
-                              form.setValue("rating", value);
+                              form.setValue("rating", value,{
+                                shouldValidate:true
+                              });
                             }}
                             className={cn(
                               "text-primary bg-transparent transition-all duration-300 ease-in-out",
                               form.getValues("rating") >= value
-                                ? "text-primary"
-                                : "text-muted"
+                                ? "fill-primary"
+                                : "fill-muted"
                             )}
                           />
                         </motion.div>
@@ -105,8 +133,12 @@ export default function ReviewsForm() {
                 </FormItem>
               )}
             />
-            <Button className="w-full" type="submit">
-              Add Review
+            <Button
+              disabled={status === "executing"}
+              className="w-full"
+              type="submit"
+            >
+              {status === "executing" ? "Adding Reviews" : "Add Review"}
             </Button>
           </form>
         </Form>

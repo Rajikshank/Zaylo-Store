@@ -9,6 +9,15 @@ const config = withUt({
   ],
   theme: {
     extend: {
+      maxWidth: {
+        "8xl": "88rem",
+      },
+      minHeight: {
+        "50vh": "50vh",
+      },
+      height: {
+        "80": "22rem",
+      },
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -59,5 +68,5 @@ const config = withUt({
     },
   },
   plugins: [require("tailwindcss-animate")],
-})  
+});
 export default config;

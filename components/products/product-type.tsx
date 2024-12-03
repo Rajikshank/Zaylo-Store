@@ -22,7 +22,7 @@ export default function ProductType({
           initial={{ opacity: 0, y: 6 }}
         >
           {selectedType}
-        </motion.div>
+        </motion.div> 
       );
     }
   });
