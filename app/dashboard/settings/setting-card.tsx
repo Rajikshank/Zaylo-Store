@@ -30,7 +30,7 @@ import { Switch } from "@/components/ui/switch";
 import { FormError } from "@/components/auth/form-error";
 import { FormSuccess } from "@/components/auth/form-success";
 import { useState } from "react";
-import { useAction } from "next-safe-action/hook";
+import { useAction } from "next-safe-action/hooks";
 import { settings } from "@/server/actions/settings";
 import { UploadButton } from "@/app/api/uploadthing/upload";
 

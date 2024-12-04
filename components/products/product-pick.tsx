@@ -22,7 +22,7 @@ export default function ProductPick({
 }) {
   const router = useRouter();
   const searchparams = useSearchParams();
-  const selectedparams = searchparams.get("type" || productType);
+  const selectedparams = searchparams.get("type" )|| productType;
 
   return (
     <div

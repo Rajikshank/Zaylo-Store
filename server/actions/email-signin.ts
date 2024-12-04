@@ -25,6 +25,10 @@ export const emailSignIn = action(
         where: eq(users.email, email),
       });
 
+      if (!existingUser) {
+        return { error: "Email not found" };
+      }
+
       if (existingUser?.email != email) {
         return { error: "Email not found" };
       }
@@ -35,7 +39,7 @@ export const emailSignIn = action(
 
       if (!existingUser.emailVerified) {
         const verificationToken = await generateEmailVerificationToken(
-          existingUser.email
+          existingUser.email!
         );
         await sendVerificationEmail(
           verificationToken[0].email,
@@ -55,7 +59,7 @@ export const emailSignIn = action(
             return { error: " Invalid Token" };
           }
           if (twoFactorToken.token !== code) {
-            console.log("token is invalid")
+            console.log("token is invalid");
             return { error: "Invalid Token" };
           }
 

@@ -25,7 +25,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { DollarSign } from "lucide-react";
 import Tiptap from "./tiptap";
-import { useAction } from "next-safe-action/hook";
+import { useAction } from "next-safe-action/hooks";
 import { createProduct } from "@/server/actions/create-product";
 
 import { useRouter, useSearchParams } from "next/navigation";

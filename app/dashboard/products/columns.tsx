@@ -14,7 +14,7 @@ import {
 
 import { deleteProdcut } from "@/server/actions/delete-product";
 import { toast } from "@/hooks/use-toast";
-import { useAction } from "next-safe-action/hook";
+import { useAction } from "next-safe-action/hooks";
 import Link from "next/link";
 import { VariantsWithImagesTags } from "@/lib/infer-types";
 import {

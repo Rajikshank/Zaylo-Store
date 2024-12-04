@@ -26,7 +26,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { VariantSchema } from "@/types/variant-schema";
 import { InputTags } from "./input-tags";
 import VariantImages from "./variant-images";
-import { useAction } from "next-safe-action/hook";
+import { useAction } from "next-safe-action/hooks";
 import { createVariant } from "@/server/actions/create-variant";
 import { toast } from "@/hooks/use-toast";
 import { useEffect, useState } from "react";

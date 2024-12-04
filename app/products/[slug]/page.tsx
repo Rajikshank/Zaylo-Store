@@ -10,6 +10,7 @@ import Reviews from "@/components/reviews/reviews";
 import { getReviewAverage } from "@/lib/review-average";
 import Stars from "@/components/reviews/stars";
 import AddCart from "@/components/cart/add-cart";
+import { use } from "react";
 
 export const revalidate = 60;
 export async function generateStaticParams() {
@@ -28,9 +29,12 @@ export async function generateStaticParams() {
   }
   return [];
 }
-export default async function Page({ params }: { params: { slug: string } }) {
+type tParams = Promise<{ slug: string }>;
+export default async function Page(params: { params: tParams }) {
+  const PARAMS = await params.params
+
   const variant = await db.query.productVariants.findFirst({
-    where: eq(productVariants.id, Number(params.slug)),
+    where: eq(productVariants.id, Number(PARAMS.slug)),
     with: {
       product: {
         with: {

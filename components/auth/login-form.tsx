@@ -19,7 +19,8 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 import { emailSignIn } from "@/server/actions/email-signin";
 
-import { useAction } from "next-safe-action/hook";
+import { useAction } from "next-safe-action/hooks";
+ 
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { FormSuccess } from "./form-success";
@@ -81,7 +82,7 @@ export const LoginForm = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>
-                        We've sent your a two factor code to your email !!{" "}
+                        We&apos;ve sent your a two factor code to your email !!{" "}
                       </FormLabel>
                       <FormControl>
                         <InputOTP

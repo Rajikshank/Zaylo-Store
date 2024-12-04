@@ -18,7 +18,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
 import Link from "next/link";
 
-import { useAction } from "next-safe-action/hook";
+import { useAction } from "next-safe-action/hooks";
 import { cn } from "@/lib/utils";
 // import { useState } from "react";
 import { RegisterSchema } from "@/types/register-schema";

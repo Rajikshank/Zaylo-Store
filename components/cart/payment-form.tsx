@@ -10,7 +10,7 @@ import {
 import { Button } from "../ui/button";
 import { useState } from "react";
 import { createPaymentIntent } from "@/server/actions/create-paymnet-intent";
-import { useAction } from "next-safe-action/hook";
+import { useAction } from "next-safe-action/hooks";
 import { createOrder } from "@/server/actions/create-order";
 import { toast } from "@/hooks/use-toast";
 
@@ -23,6 +23,10 @@ export default function PaymentForm({ totalPrice }: { totalPrice: number }) {
   const [errorMessage, setErrorMessage] = useState("");
 
   const { execute } = useAction(createOrder, {
+    onError(data) {
+      console.log("getting error", data);
+    },
+
     onSuccess(data) {
       if (data.error) {
         toast({
@@ -72,6 +76,7 @@ export default function PaymentForm({ totalPrice }: { totalPrice: number }) {
     });
 
     if (data?.error) {
+      console.log("error", data.error);
       setErrorMessage(data.error);
       setIsLoading(false);
       return;
@@ -93,6 +98,8 @@ export default function PaymentForm({ totalPrice }: { totalPrice: number }) {
         setIsLoading(false);
         return;
       } else {
+        console.log("executing");
+
         setIsLoading(false);
         execute({
           status: "pending",

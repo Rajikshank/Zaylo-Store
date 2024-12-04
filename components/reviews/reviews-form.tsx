@@ -25,7 +25,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useAction } from "next-safe-action/hook";
+import { useAction } from "next-safe-action/hooks";
 import { addReview } from "@/server/actions/add-reviews";
 import { toast } from "@/hooks/use-toast";
 
