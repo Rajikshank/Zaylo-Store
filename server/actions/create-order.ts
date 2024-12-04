@@ -10,7 +10,7 @@ const action = createSafeActionClient();
 
 export const createOrder = action(
   createOrderSchema,
-  async ({ products, status, total }) => {
+  async ({ products, status, total, paymentIntetnID }) => {
     const user = await auth();
     if (!user) return { error: "user not found" };
 
@@ -20,6 +20,7 @@ export const createOrder = action(
         status,
         total,
         userID: user.user.id,
+        paymentIntetnID,
       })
       .returning();
 

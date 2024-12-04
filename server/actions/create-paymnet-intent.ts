@@ -5,6 +5,7 @@ import { createSafeActionClient } from "next-safe-action"
 import Stripe from "stripe"
 import { auth } from "../auth"
 import { paymentIntentSchema } from "@/types/payment-intent"
+import { title } from "process"
 
 const stripe = new Stripe(process.env.STRIPE_SECRET!)
 const action = createSafeActionClient()
@@ -23,6 +24,7 @@ export const createPaymentIntent = action(
         enabled: true,
       },
 
+    
       metadata: {
         cart: JSON.stringify(cart),
       },

@@ -10,4 +10,5 @@ export const createOrderSchema = z.object({
       quantity: z.number(),
     })
   ),
+  paymentIntetnID: z.string(),
 });

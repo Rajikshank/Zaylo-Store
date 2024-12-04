@@ -29,7 +29,7 @@ export const users = pgTable("user", {
   password: text("password"),
   twoFactorEnabled: boolean("twoFactorEnabled").default(false),
   role: RoleEnum("roles").default("user"),
-  customerID:text("customerID")
+  customerID: text("customerID"),
 });
 
 export const accounts = pgTable(
@@ -231,6 +231,7 @@ export const orders = pgTable("orders", {
   status: text("status").notNull(),
   created: timestamp("created").defaultNow(),
   receiptUrl: text("receiptURL"),
+  paymentIntetnID: text("paymentIntentID"),
 });
 
 export const ordersRelations = relations(orders, ({ one, many }) => ({

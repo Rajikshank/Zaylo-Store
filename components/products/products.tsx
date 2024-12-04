@@ -5,15 +5,31 @@ import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "../ui/badge";
 import { formatPricetoLKR } from "@/lib/format-price";
+import { useMemo } from "react";
+import { useSearchParams } from "next/navigation";
 
 type ProductTyoes = {
   variants: VariantsWithProduct[];
 };
 export default function Products({ variants }: ProductTyoes) {
+  const params = useSearchParams();
+
+  const tagFilter = params.get("tag");
+  const filtered = useMemo(() => {
+    if (tagFilter && variants) {
+     return variants.filter((variant) =>
+        variant.variantTags.some((tag) => tag.tag === tagFilter)
+      );
+    }
+
+    return variants;
+  }, [tagFilter]);
+
   return (
     <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-12 lg:grid-cols-3 ">
-      {variants.map((variant) => (
-        <Link className="py-2"
+      {filtered.map((variant) => (
+        <Link
+          className="py-2"
           key={variant.id}
           href={`/products/${variant.id}?id=${variant.id}&productID=${variant.productID}&price=${variant.product.price}&title=${variant.product.title}&type=${variant.productType}&image=${variant.variantImages[0].url}`}
         >
@@ -34,9 +50,9 @@ export default function Products({ variants }: ProductTyoes) {
               </p>
             </div>
             <div>
-                <Badge  className="text-sm" variant={"secondary"}>
-                    {formatPricetoLKR(variant.product.price)}
-                </Badge>
+              <Badge className="text-sm" variant={"secondary"}>
+                {formatPricetoLKR(variant.product.price)}
+              </Badge>
             </div>
           </div>
         </Link>

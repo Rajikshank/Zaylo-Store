@@ -5,7 +5,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -20,10 +19,11 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { formatDistance, subHours, subMinutes } from "date-fns";
+import { formatDistance, subMinutes } from "date-fns";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -38,12 +38,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function Page() {
   const user = await auth();
 
   if (!user) {
-    redirect: "/login";
+    redirect("/login");
   }
 
   const usersOrder = await db.query.orders.findMany({
@@ -85,8 +86,8 @@ export default async function Page() {
                   <Badge
                     className={cn(
                       order.status === "succeeded"
-                        ? "bg-green-700"
-                        : "bg-yellow-400"
+                        ? "bg-green-700 hover:bg-green-800"
+                        : "bg-yellow-400 hover:bg-yellow-500"
                     )}
                   >
                     {order.status}
@@ -113,11 +114,29 @@ export default async function Page() {
                             </Button>
                           </DialogTrigger>
                         </DropdownMenuItem>
+
+                        {order.receiptUrl ? (
+                          <DropdownMenuItem>
+                            <Button
+                              className="w-full"
+                              variant={"ghost"}
+                              asChild
+                            >
+                              <Link href={order.receiptUrl} target="_blank">
+                                {" "}
+                                Download the Receipt
+                              </Link>
+                            </Button>
+                          </DropdownMenuItem>
+                        ) : null}
                       </DropdownMenuContent>
                     </DropdownMenu>
-                    <DialogContent>
+                    <DialogContent className="rounded-md">
                       <DialogHeader>
                         <DialogTitle>Order details #{order.id}</DialogTitle>
+                        <DialogDescription>
+                          Your Order total is ${order.total}
+                        </DialogDescription>
                       </DialogHeader>
                       <Card className="overflow-auto p-2 flex flex-col gap-4">
                         <Table>
@@ -157,7 +176,9 @@ export default async function Page() {
                                       className="w-4 h-4 rounded-full"
                                     ></div>
                                   </TableCell>
-                                  <TableCell className="text-md">{quantity}</TableCell>
+                                  <TableCell className="text-md">
+                                    {quantity}
+                                  </TableCell>
                                 </TableRow>
                               )
                             )}
