@@ -18,11 +18,11 @@ Welcome to **Zaylo**! This project is a feature-rich e-commerce application buil
 
 | Technology            | Description                                    |
 |-----------------------|------------------------------------------------|
-| ![Next.js](https://upload.wikimedia.org/wikipedia/commons/8/8e/Nextjs-logo.svg) | Framework for building server-side rendered React applications. |
-| ![ShadCN UI](https://shadcn.dev/images/logo-dark.svg) | Beautiful and customizable UI components.      |
-| ![Stripe](https://upload.wikimedia.org/wikipedia/commons/4/41/Stripe_Logo%2C_revised_2016.svg) | Payment gateway for secure transactions.        |
-| ![Framer Motion](https://framer.com/images/logo.svg) | Library for animations and transitions.        |
-| ![TypeScript](https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg) | Strongly typed JavaScript for reliability.      |
+| <img src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Nextjs-logo.svg" alt="Next.js" height="40" /> | Framework for building server-side rendered React applications. |
+| <img src="https://shadcn.dev/images/logo-dark.svg" alt="ShadCN UI" height="40" /> | Beautiful and customizable UI components.      |
+| <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Stripe_Logo%2C_revised_2016.svg" alt="Stripe" height="40" /> | Payment gateway for secure transactions.        |
+| <img src="https://framer.com/images/logo.svg" alt="Framer Motion" height="40" /> | Library for animations and transitions.        |
+| <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg" alt="TypeScript" height="40" /> | Strongly typed JavaScript for reliability.      |
 
 ---
 
