@@ -5,7 +5,7 @@ import React from "react";
 export default function FooterComp() {
   console.log("Footer component is rendering");
   return (
-    <footer className="bg-black text-white py-8 mt-4 border-t-4 border-red-500">
+    <footer className="bg-black  text-white py-8 mt-4  border-t-4 border-red-500">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
