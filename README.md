@@ -68,7 +68,6 @@ Follow these instructions to set up the project locally.
 
 - Sales data visualization with interactive charts.
 - Detailed insights into product performance.
-- Integration with Stripe for payment and refund tracking.
 
 ---
 
@@ -126,8 +125,8 @@ We welcome contributions! If you want to contribute:
 
 For inquiries or support, feel free to reach out:
 
-- Email: your-email@example.com
-- GitHub: [your-username](https://github.com/your-username)
+- Email: krajikshan637@gmail.com
+- GitHub: [RajikshanK](https://github.com/Rajikshank)
 
 ---
 
