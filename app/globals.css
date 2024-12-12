@@ -12,6 +12,19 @@ body {
    
 }
 
+.cls-1 {
+  stroke: #020202;
+  stroke-linejoin: round;
+  stroke-width: 2px;
+  font-size: 208.375px;
+  text-anchor: middle;
+  fill: #090909;
+  font-family: "Bebas Neue";
+}
+
+.cls-2 {
+  fill: #fefefe;
+}
  
 
 @layer base {

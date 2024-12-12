@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke: #020202;
+        stroke-linejoin: round;
+        stroke-width: 2px;
+        font-size: 208.375px;
+        text-anchor: middle;
+        fill: #090909;
+        font-family: "Bebas Neue";
+      }
+
+      .cls-2 {
+        fill: #fefefe;
+      }
+    </style>
+  </defs>
+  <g id="Artboard_1" data-name="Artboard 1">
+    <text id="zaylo" class="cls-1" x="199.536" y="284.433">za<tspan class="cls-2">y</tspan>lo</text>
+  </g>
+</svg>

@@ -15,6 +15,7 @@ import {
 import type { AdapterAccountType } from "next-auth/adapters";
 import { createId } from "@paralleldrive/cuid2";
 import { InferSelectModel, relations } from "drizzle-orm";
+import { float } from "drizzle-orm/mysql-core";
 
 export const RoleEnum = pgEnum("roles", ["user", "admin"]);
 
@@ -234,6 +235,14 @@ export const orders = pgTable("orders", {
   paymentIntetnID: text("paymentIntentID"),
 });
 
+export const discounts = pgTable("product_discounts", {
+  id: serial("id").primaryKey(),
+  discount: real().default(10.1),
+  productID: serial("productID")
+    .notNull()
+    .references(() => products.id, { onDelete: "cascade" }),
+});
+
 export const ordersRelations = relations(orders, ({ one, many }) => ({
   user: one(users, {
     fields: [orders.userID],
@@ -241,6 +250,14 @@ export const ordersRelations = relations(orders, ({ one, many }) => ({
     relationName: "user_orders",
   }),
   orderProduct: many(orderProduct, { relationName: "orderProduct" }),
+}));
+
+export const discountRelations = relations(discounts, ({ one, many }) => ({
+  products: one(products, {
+    fields: [discounts.productID],
+    references: [products.id],
+    relationName: "dicount_products",
+  }),
 }));
 
 export const orderProduct = pgTable("orderProduct", {
