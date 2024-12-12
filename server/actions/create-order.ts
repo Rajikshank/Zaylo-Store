@@ -12,7 +12,7 @@ export const createOrder = action(
   createOrderSchema,
   async ({ products, status, total, paymentIntetnID }) => {
     const user = await auth();
-    console.log("inside create order");
+
     if (!user) return { error: "user not found" };
 
     const order = await db

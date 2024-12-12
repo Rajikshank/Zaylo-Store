@@ -35,7 +35,7 @@ export default function CartDrawer() {
               </motion.span>
             )}
           </AnimatePresence>
-          <ShoppingBag />
+          <ShoppingBag className="hover:shadow "/>
         </div>
       </DrawerTrigger>
       <DrawerContent className="fixed bottom-0 left-0 max-h-[70vh] min-h-[50vh]">

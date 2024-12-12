@@ -1,31 +1,31 @@
-import { db } from "@/server"
-import { orders } from "@/server/schema"
-import { eq } from "drizzle-orm"
-import { type NextRequest, NextResponse } from "next/server"
-import Stripe from "stripe"
+import { db } from "@/server";
+import { orders } from "@/server/schema";
+import { eq } from "drizzle-orm";
+import { type NextRequest, NextResponse } from "next/server";
+import Stripe from "stripe";
 
 // export const config = { api: { bodyParser: false } };
 
 export async function POST(req: NextRequest) {
   const stripe = new Stripe(process.env.STRIPE_SECRET || "", {
     apiVersion: "2024-11-20.acacia",
-  })
-  const sig = req.headers.get("stripe-signature") || ""
-  const signingSecret = process.env.STRIPE_WEBHOOK_SECRET || ""
+  });
+  const sig = req.headers.get("stripe-signature") || "";
+  const signingSecret = process.env.STRIPE_WEBHOOK_SECRET || "";
 
   // Read the request body as text
-  const reqText = await req.text()
+  const reqText = await req.text();
   // Convert the text to a buffer
-  const reqBuffer = Buffer.from(reqText)
+  const reqBuffer = Buffer.from(reqText);
 
-  let event
+  let event;
 
   try {
-    event = stripe.webhooks.constructEvent(reqBuffer, sig, signingSecret)
+    event = stripe.webhooks.constructEvent(reqBuffer, sig, signingSecret);
   } catch (err: any) {
     return new NextResponse(`Webhook Error: ${err.message}`, {
       status: 400,
-    })
+    });
   }
 
   // Handle the event just an example!
@@ -34,9 +34,10 @@ export async function POST(req: NextRequest) {
       const retrieveOrder = await stripe.paymentIntents.retrieve(
         event.data.object.id,
         { expand: ["latest_charge"] }
-      )
-      const charge = retrieveOrder.latest_charge as Stripe.Charge
+      );
+      const charge = retrieveOrder.latest_charge as Stripe.Charge;
 
+      console.log(" \n -------------\n\n stripe event \n \n", event.data.object);
       await db
         .update(orders)
         .set({
@@ -44,14 +45,14 @@ export async function POST(req: NextRequest) {
           receiptUrl: charge.receipt_url,
         })
         .where(eq(orders.paymentIntetnID, event.data.object.id))
-        .returning()
+        .returning();
 
       // Then define and call a function to handle the event product.created
-      break
+      break;
 
     default:
-      console.log(`${event.type}`)
+      console.log(`${event.type}`);
   }
 
-  return new Response("ok", { status: 200 })
+  return new Response("ok", { status: 200 });
 }

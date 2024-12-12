@@ -29,18 +29,21 @@ export default function Products({ variants }: ProductTyoes) {
     <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-12 lg:grid-cols-3 ">
       {filtered.map((variant) => (
         <Link
-          className="py-2"
+          className="py-2    "
           key={variant.id}
           href={`/products/${variant.id}?id=${variant.id}&productID=${variant.productID}&price=${variant.product.price}&title=${variant.product.title}&type=${variant.productType}&image=${variant.variantImages[0].url}`}
         >
+          
+           
           <Image
-            className="rounded-md pb-2 "
+            className="rounded-md pb-2 object-contain h-[480px] w-[720px]   "
             src={variant.variantImages[0].url}
             alt={variant.product.title}
             width={720}
             height={480}
             loading="lazy"
           />
+          
           <div className="flex justify-between">
             <div className="font-medium">
               {" "}
