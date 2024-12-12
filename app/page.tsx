@@ -19,9 +19,9 @@ export default async function Home() {
   return (
     <div>
       {/* <AlgoliaSearch /> */}
-      <DiscountCarousel />
+      <DiscountCarousel variants={data} />
       <ProductTags />
-      
+
       <Products variants={data} />
     </div>
   );

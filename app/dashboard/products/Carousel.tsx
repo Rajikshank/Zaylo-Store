@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Carousel,
   CarouselContent,
@@ -5,21 +7,45 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { db } from "@/server";
 
 import Image from "next/image";
-import Autoplay from "embla-carousel-autoplay";
+import { type CarouselApi } from "@/components/ui/carousel";
+import { VariantsWithProduct } from "@/lib/infer-types";
+import { useEffect, useState } from "react";
 
-export default async function DiscountCarousel() {
-  let data = await db.query.variantImages.findMany();
+type ProductTyoes = {
+  variants: VariantsWithProduct[];
+};
 
-  console.log("products", data);
+export default function DiscountCarousel({ variants }: ProductTyoes) {
+  const [api, setApi] = useState<CarouselApi>();
 
+  useEffect(() => {
+    let id_2;
+    let id = setInterval(() => {
+      if (api?.canScrollNext()) {
+        api.scrollNext();
+        return;
+      }
+
+      if (api?.canScrollNext() === false) {
+        id_2 = setTimeout(() => api.scrollTo(0), 4000);
+      }
+    }, 4000);
+
+     
+
+    return () => {
+      clearInterval(id);
+      clearTimeout(id_2);
+      return;
+    };
+  }, [api]);
   return (
     <div className="bg-slate-300 rounded my-4">
-      <Carousel>
+      <Carousel setApi={setApi}>
         <CarouselContent>
-          {data.map((item) => (
+          {variants.map((item) => (
             <CarouselItem
               key={item.id}
               className="flex items-center justify-center"
@@ -27,7 +53,7 @@ export default async function DiscountCarousel() {
               <Image
                 className="object-contain h-[400px] w-[600px]"
                 loading="lazy"
-                src={item.url}
+                src={item.variantImages[0].url}
                 alt="Discounts"
                 height={400}
                 width={600}
@@ -37,6 +63,13 @@ export default async function DiscountCarousel() {
         </CarouselContent>
         <CarouselPrevious />
         <CarouselNext />
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 flex gap-2">
+        <div className="h-3 w-3 rounded-full bg-white/50 hover:bg-white transition-colors" />
+        <div className="h-3 w-3 rounded-full bg-white/50 hover:bg-white transition-colors" />
+        <div className="h-3 w-3 rounded-full bg-white/50 hover:bg-white transition-colors" />
+        <div className="h-3 w-3 rounded-full bg-white/50 hover:bg-white transition-colors" />
+        <div className="h-3 w-3 rounded-full bg-white/50 hover:bg-white transition-colors" />
+      </div>
       </Carousel>
     </div>
   );
