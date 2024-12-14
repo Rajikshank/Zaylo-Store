@@ -147,9 +147,10 @@ export const variantTags = pgTable("variantTags", {
     .references(() => productVariants.id, { onDelete: "cascade" }),
 });
 
-export const productRelations = relations(products, ({ many }) => ({
+export const productRelations = relations(products, ({ one, many }) => ({
   productVariants: many(productVariants, { relationName: "productVariants" }),
   reviews: many(reviews, { relationName: "reviews" }),
+  discounts: many(discounts,{ relationName: "dicount_products" }),
 }));
 
 export const productVariantsRelations = relations(
@@ -238,6 +239,7 @@ export const orders = pgTable("orders", {
 export const discounts = pgTable("product_discounts", {
   id: serial("id").primaryKey(),
   discount: real().default(10.1),
+  url: text("url").notNull(),
   productID: serial("productID")
     .notNull()
     .references(() => products.id, { onDelete: "cascade" }),

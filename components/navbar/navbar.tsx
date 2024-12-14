@@ -10,10 +10,10 @@ export default async function Navbar() {
   const session = await auth();
   console.log(session);
   return (
-    <header className="bg-gray-300 py-2 shadow-md ">
+    <header className="bg-white dark:bg-slate-200 border-b border-black    ">
 
       <ul className="flex justify-between text-black px-12 lg:px-8 max-w-8xl mx-auto items-center md:gap-8 gap-4">
-        <li className="flex flex-1">
+        <li className="flex items-center  flex-1">
           <Link href={"/"} aria-label="AgroStore Logo">
             {" "}
             <Logo />

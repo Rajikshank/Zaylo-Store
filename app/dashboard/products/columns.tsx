@@ -24,6 +24,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import ProductVariant from "./productvariant";
+import AddDiscountForm from "./Add-discount";
 
 import {
   Dialog,
@@ -92,51 +93,30 @@ const ActionCell = ({ row }: { row: Row<ProductColumn> }) => {
             Edit Product{" "}
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem className="dark:bg-primary focus:bg-yellow-200/50 cursor-pointer">
-          <Dialog>
-            <DialogTrigger asChild>
-              <button
-                className="text-left"
-                onClick={(e) => e.stopPropagation()}
-              >
-                Add Discount
-              </button>
-            </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
-              <DialogHeader>
-                <DialogTitle>Add Discount</DialogTitle>
-                <DialogDescription>
-                  Make Promotional Discount for your products
-                </DialogDescription>
-              </DialogHeader>
-              {/* <div className="grid gap-4 py-4">
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Label htmlFor="name" className="text-right">
-                    Name
-                  </Label>
-                  <Input
-                    id="name"
-                    value="Pedro Duarte"
-                    className="col-span-3"
-                  />
-                </div>
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Label htmlFor="username" className="text-right">
-                    Username
-                  </Label>
-                  <Input
-                    id="username"
-                    value="@peduarte"
-                    className="col-span-3"
-                  />
-                </div>
-              </div> */}
-              <DialogFooter>
-                {/* <Button type="submit">Save changes</Button> */}
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
-        </DropdownMenuItem>
+
+        <Dialog>
+          <DialogTrigger asChild>
+            <DropdownMenuItem
+              onSelect={(e) => e.preventDefault()}
+              className="dark:bg-primary focus:bg-yellow-200/50 cursor-pointer"
+            >
+              <button className="text-left">Add Discount</button>
+            </DropdownMenuItem>
+          </DialogTrigger>
+
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+              <DialogTitle>Add Discount</DialogTitle>
+              <DialogDescription>
+                Make Promotional Discount for your products
+              </DialogDescription>
+            </DialogHeader>
+            <div>
+              <AddDiscountForm productID={product.id} />
+            </div>
+          </DialogContent>
+        </Dialog>
+
         <DropdownMenuItem
           onClick={() => execute({ id: product.id })}
           className="dark:bg-destructive focus:bg-destructive/50 cursor-pointer"
@@ -219,6 +199,16 @@ export const columns: ColumnDef<ProductColumn>[] = [
       }).format(price);
 
       return <div className="font-medium text-sm">{formatted}</div>;
+    },
+  },
+  {
+    accessorKey: "discount",
+    header: "Discount",
+    cell: ({ row }) => {
+      const discount = parseFloat(row.getValue("discount"));
+       
+
+      return <div className="font-bold text-sm bg-red-400 border border-black rounded-md p-1 text-center">{discount}%</div>;
     },
   },
   {

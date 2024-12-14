@@ -7,6 +7,7 @@ import { columns } from "./columns";
 export default async function Products() {
   const products = await db.query.products.findMany({
     with: {
+      discounts: true,
       productVariants: { with: { variantImages: true, variantTags: true } },
     },
     orderBy: (products, { desc }) => [desc(products.id)],
@@ -22,17 +23,19 @@ export default async function Products() {
         price: product.price,
         variants: [],
         image: placeholder.src,
+        discount: product.discounts[0]?.discount?? 0,
       };
     }
 
-    const image=product.productVariants[0].variantImages[0].url
+    const image = product.productVariants[0].variantImages[0].url;
     return {
-      id:product.id,
-      title:product.title,
-      price:product.price,
-      variants:product.productVariants,
-      image
-    }
+      id: product.id,
+      title: product.title,
+      price: product.price,
+      variants: product.productVariants,
+      image,
+      discount: product.discounts[0]?.discount ?? 0,
+    };
   });
 
   return (

@@ -12,6 +12,7 @@ import Image from "next/image";
 import { type CarouselApi } from "@/components/ui/carousel";
 import { VariantsWithProduct } from "@/lib/infer-types";
 import { useEffect, useState } from "react";
+import placholder from "@/public/placholder.png"
 
 type ProductTyoes = {
   variants: VariantsWithProduct[];
@@ -33,8 +34,6 @@ export default function DiscountCarousel({ variants }: ProductTyoes) {
       }
     }, 4000);
 
-     
-
     return () => {
       clearInterval(id);
       clearTimeout(id_2);
@@ -46,14 +45,15 @@ export default function DiscountCarousel({ variants }: ProductTyoes) {
       <Carousel setApi={setApi}>
         <CarouselContent>
           {variants.map((item) => (
+          
             <CarouselItem
               key={item.id}
-              className="flex items-center justify-center"
+              className="flex items-center  justify-center"
             >
               <Image
                 className="object-contain h-[400px] w-[600px]"
                 loading="lazy"
-                src={item.variantImages[0].url}
+                src={item.product.discounts[0] ?item.product.discounts[0].url :placholder }
                 alt="Discounts"
                 height={400}
                 width={600}
@@ -64,12 +64,12 @@ export default function DiscountCarousel({ variants }: ProductTyoes) {
         <CarouselPrevious />
         <CarouselNext />
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 flex gap-2">
-        <div className="h-3 w-3 rounded-full bg-white/50 hover:bg-white transition-colors" />
-        <div className="h-3 w-3 rounded-full bg-white/50 hover:bg-white transition-colors" />
-        <div className="h-3 w-3 rounded-full bg-white/50 hover:bg-white transition-colors" />
-        <div className="h-3 w-3 rounded-full bg-white/50 hover:bg-white transition-colors" />
-        <div className="h-3 w-3 rounded-full bg-white/50 hover:bg-white transition-colors" />
-      </div>
+          <div className="h-3 w-3 rounded-full bg-white/50 hover:bg-white transition-colors" />
+          <div className="h-3 w-3 rounded-full bg-white/50 hover:bg-white transition-colors" />
+          <div className="h-3 w-3 rounded-full bg-white/50 hover:bg-white transition-colors" />
+          <div className="h-3 w-3 rounded-full bg-white/50 hover:bg-white transition-colors" />
+          <div className="h-3 w-3 rounded-full bg-white/50 hover:bg-white transition-colors" />
+        </div>
       </Carousel>
     </div>
   );

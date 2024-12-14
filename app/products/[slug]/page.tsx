@@ -57,7 +57,7 @@ export default async function Page(params: { params: tParams }) {
 
     return (
       <div>
-        <section className="flex flex-col lg:flex-row gap-4 lg:gap-12  ">
+        <section className="flex flex-col lg:flex-row gap-4 lg:gap-12 my-2  ">
           <div className="flex-1">
             <ProductShowcase variants={variant.product.productVariants} />
           </div>
