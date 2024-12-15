@@ -23,7 +23,7 @@ export default async function Home() {
       <DiscountCarousel variants={data} />
       <ProductTags />
 
-      <ProductListSingle data={data} />
+      {/* <ProductListSingle data={data} /> */}
       <Products variants={data} />
     </div>
   );
