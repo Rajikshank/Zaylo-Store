@@ -5,24 +5,28 @@ import { LogIn } from "lucide-react";
 import { Button } from "../ui/button";
 import Logo from "@/components/navbar/logo";
 import CartDrawer from "../cart/cart-drawer";
+import AlgoliaSearch from "@/components/products/algolia";
 
 export default async function Navbar() {
   const session = await auth();
   console.log(session);
   return (
     <header className="bg-white dark:bg-slate-200 border-b border-black    ">
-
-      <ul className="flex justify-between text-black px-12 lg:px-8 max-w-8xl mx-auto items-center md:gap-8 gap-4">
+      <ul className="flex justify-between  text-black px-12 lg:px-8 max-w-8xl mx-auto items-center md:gap-8 gap-4">
         <li className="flex items-center  flex-1">
           <Link href={"/"} aria-label="AgroStore Logo">
             {" "}
             <Logo />
           </Link>
         </li>
+        <li className="flex  pt-4 w-full items-center justify-center">
+          <AlgoliaSearch  />
+        </li>
 
         <li className="relative flex items-center hover:bg-muted ">
           <CartDrawer />
         </li>
+     
 
         {!session ? (
           <li className="flex items-center justify-center">

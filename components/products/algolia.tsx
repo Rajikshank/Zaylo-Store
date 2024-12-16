@@ -79,7 +79,7 @@ export default function Algolia() {
       indexName="products"
       searchClient={searchClient}
     >
-      <div className="relative">
+      <div className="relative w-full">
         <SearchBox
           onFocus={() => setActive(true)}
           onBlur={() => {
