@@ -39,6 +39,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Image from "next/image";
 import Link from "next/link";
+import { orders } from "@/server/schema";
+import { eq } from "drizzle-orm";
 
 export default async function Page() {
   const user = await auth();
@@ -48,6 +50,7 @@ export default async function Page() {
   }
 
   const usersOrder = await db.query.orders.findMany({
+    where: eq(orders.userID, user.user.id),
     with: {
       orderProduct: {
         with: {

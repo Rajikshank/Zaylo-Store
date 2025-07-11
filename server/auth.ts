@@ -56,6 +56,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         where: eq(users.id, token.sub),
       });
 
+      
+
       if (!existingUser) return token;
       const existingAccount = await db.query.accounts.findFirst({
         where: eq(accounts.userId, existingUser.id),

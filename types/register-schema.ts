@@ -7,5 +7,5 @@ export const RegisterSchema = z.object({
   }),
   name: z
     .string()
-    .min(4, { message: "Please add a name with at least 4 characters" }),
+    .min(4, { message: "Please add a name with at least 4 Characters" }),
 });

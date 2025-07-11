@@ -13,6 +13,7 @@ export const deleteProdcut = action(
   z.object({ id: z.number() }),
   async ({ id }) => {
     try {
+      
       const data = await db
         .delete(products)
         .where(eq(products.id, id))
