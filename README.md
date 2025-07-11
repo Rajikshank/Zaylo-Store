@@ -6,7 +6,7 @@ Welcome to **Zaylo**! This project is a feature-rich e-commerce application buil
 
 ## 🚀 Features
 
-- **Add/Edit Product:** Seamlessly manage your product catalog with an intuitive interface.
+- **Add/Edit Product:** Seamlessly manage your product catalog with an intuitive interfaces.
 - **View Sales Analytics:** Gain insights into your store's performance with comprehensive analytics.
 - **View Payment Status:** Track payment statuses in real-time with Stripe integration.
 - **Mobile Responsive:** Optimized for mobile devices to provide a great user experience.
