@@ -16,13 +16,13 @@ Welcome to **Zaylo**! This project is a feature-rich e-commerce application buil
 
 ## 🛠 Technologies Used
 
-| Technology            | Description                                    |
-|-----------------------|------------------------------------------------|
-| <img src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Nextjs-logo.svg" alt="Next.js" height="40" /> | Framework for building server-side rendered React applications. |
-| <img src="https://shadcn.dev/images/logo-dark.svg" alt="ShadCN UI" height="40" /> | Beautiful and customizable UI components.      |
-| <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Stripe_Logo%2C_revised_2016.svg" alt="Stripe" height="40" /> | Payment gateway for secure transactions.        |
-| <img src="https://framer.com/images/logo.svg" alt="Framer Motion" height="40" /> | Library for animations and transitions.        |
-| <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg" alt="TypeScript" height="40" /> | Strongly typed JavaScript for reliability.      |
+| Technology | Description |
+|------------|-------------|
+| <img src="https://raw.githubusercontent.com/vercel/next.js/canary/packages/next/static/media/nextjs-logo.svg" alt="Next.js" height="40" /> | **Next.js:** A powerful framework for building server-rendered React applications. (&#8203;:contentReference[oaicite:2]{index=2}) |
+| <img src="https://ui.shadcn.com/logo.svg" alt="ShadCN UI" height="40" /> | **ShadCN UI:** Beautiful, customizable UI components to speed up development. (&#8203;:contentReference[oaicite:3]{index=3}) |
+| <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Stripe_Logo%2C_revised_2016.svg" alt="Stripe" height="40" /> | **Stripe:** A secure payment gateway for hassle-free transactions. |
+| <img src="https://framer.com/images/logo.svg" alt="Framer Motion" height="40" /> | **Framer Motion:** Create smooth animations and transitions effortlessly. |
+| <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg" alt="TypeScript" height="40" /> | **TypeScript:** Bring type safety to JavaScript for more reliable code. |
 
 ---
 
